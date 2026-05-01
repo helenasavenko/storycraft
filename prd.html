@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)file:///Users/helenasavenko/Downloads/celebration_prd_1.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Celebration — Mini PRD</title>
+<link href="./prd_files/css2" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f9f7f4;
+    --bg2: #f2efe9;
+    --ink: #1a1218;
+    --ink-dim: #4a3f4a;
+    --ink-muted: #8a7a8a;
+    --pink: #e91e8c;
+    --pink-light: rgba(233,30,140,0.08);
+    --purple: #6d28d9;
+    --purple-light: rgba(109,40,217,0.08);
+    --border: rgba(26,18,24,0.1);
+    --border-strong: rgba(26,18,24,0.2);
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    padding: 0;
+  }
+
+  /* HEADER */
+  header {
+    background: #1a0a2e;
+    padding: 48px 80px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--pink);
+  }
+
+  .header-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 16px;
+  }
+
+  .header-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    letter-spacing: 0.04em;
+    line-height: 0.95;
+    color: #ffffff;
+    margin-bottom: 24px;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .header-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .header-meta-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .header-meta-value {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    font-weight: 400;
+  }
+
+  .header-tag {
+    margin-left: auto;
+    background: var(--pink);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: 4px;
+    align-self: flex-start;
+  }
+
+  /* MAIN */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 64px 40px 100px;
+  }
+
+  /* SECTIONS */
+  .section {
+    margin-bottom: 64px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    margin-bottom: 20px;
+    padding-left: 16px;
+    border-left: 4px solid var(--pink);
+  }
+
+  /* PROSE */
+  .prose {
+    font-family: 'Crimson Pro', serif;
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--ink-dim);
+  }
+
+  .prose + .prose { margin-top: 16px; }
+
+  .prose strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .prose em {
+    color: var(--pink);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  /* CALLOUT */
+  .callout {
+    background: var(--pink-light);
+    border-left: 4px solid var(--pink);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+
+  .callout p {
+    font-family: 'Crimson Pro', serif;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink-dim);
+  }
+
+  .callout strong { color: var(--pink); font-weight: 600; }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 48px 0;
+  }
+
+  /* SEQUENCE */
+  .sequence {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 24px;
+  }
+
+  .seq-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .seq-item:last-child { border-bottom: none; }
+
+  .seq-num {
+    min-width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--pink);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 600; color: white;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .seq-content { flex: 1; }
+
+  .seq-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .seq-body {
+    font-family: 'Crimson Pro', serif;
+    font-size: 16px;
+    color: var(--ink-muted);
+    line-height: 1.6;
+  }
+
+  /* TWO COL */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 24px;
+  }
+
+  /* USER STORY */
+  .user-story {
+    background: var(--purple-light);
+    border: 1px solid rgba(109,40,217,0.15);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-top: 24px;
+  }
+
+  .user-story-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 12px;
+  }
+
+  .user-story p {
+    font-family: 'Crimson Pro', serif;
+    font-size: 20px;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  /* TRAIT EXAMPLES */
+  .trait-examples {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .trait-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  .trait-badge {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--purple);
+    background: var(--purple-light);
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+
+  .trait-quote {
+    font-family: 'Crimson Pro', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--ink-dim);
+    line-height: 1.5;
+  }
+
+  /* METRICS TABLE */
+  .metrics-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+
+  .metrics-table th {
+    text-align: left;
+    padding: 10px 16px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    border-bottom: 2px solid var(--border-strong);
+    background: var(--bg2);
+  }
+
+  .metrics-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink-dim);
+    font-family: 'Crimson Pro', serif;
+    font-size: 16px;
+    line-height: 1.5;
+    vertical-align: top;
+  }
+
+  .metrics-table tr:last-child td { border-bottom: none; }
+
+  .metrics-table .type {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .type-primary { color: var(--pink); }
+  .type-secondary { color: var(--purple); }
+  .type-guardrail { color: #b45309; }
+
+  /* SCOPE */
+  .scope-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 20px;
+  }
+
+  .scope-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .scope-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .scope-card-title span {
+    display: inline-block;
+    background: var(--pink);
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-right: 8px;
+  }
+
+  .scope-card-title span.ph2 { background: var(--purple); }
+
+  .scope-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .scope-list li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-family: 'Crimson Pro', serif;
+    font-size: 16px;
+    color: var(--ink-dim);
+    line-height: 1.5;
+  }
+
+  .scope-list li::before {
+    content: '—';
+    color: var(--pink);
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .scope-list.ph2 li::before { color: var(--purple); }
+
+  /* RISKS */
+  .risks-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .risk-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-left: 4px solid #d97706;
+    border-radius: 0 8px 8px 0;
+    padding: 20px;
+  }
+
+  .risk-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .risk-body {
+    font-family: 'Crimson Pro', serif;
+    font-size: 15px;
+    color: var(--ink-muted);
+    line-height: 1.6;
+  }
+
+  /* PHASE 2 LIST */
+  .phase2-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .phase2-pill {
+    background: var(--purple-light);
+    border: 1px solid rgba(109,40,217,0.2);
+    color: var(--purple);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 20px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #1a0a2e;
+    padding: 32px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.1em;
+    color: var(--pink);
+  }
+
+  .footer-meta {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow">Mini PRD · Storycraft</div>
+  <div class="header-title">Celebration</div>
+  <div class="header-meta">
+    <div class="header-meta-item">
+      <div class="header-meta-label">Author</div>
+      <div class="header-meta-value">Helena Savenko</div>
+    </div>
+    <div class="header-meta-item">
+      <div class="header-meta-label">Date</div>
+      <div class="header-meta-value">April 2026</div>
+    </div>
+    <div class="header-meta-item">
+      <div class="header-meta-label">Feature Type</div>
+      <div class="header-meta-value">Celebration System</div>
+    </div>
+    <div class="header-meta-item">
+      <div class="header-meta-label">Status</div>
+      <div class="header-meta-value">Phase 1 Spec</div>
+    </div>
+    <div class="header-tag">Celebration System</div>
+  </div>
+</header>
+
+<main>
+
+  <!-- PROBLEM STATEMENT -->
+  <div class="section">
+    <div class="section-label">01 · Problem Statement</div>
+    <div class="section-title">The Game Doesn't Celebrate Its Players</div>
+    <p class="prose">When players complete a milestone — a chapter, a quest, a level up — the game barely acknowledges what just happened. A generic popup appears with a currency drop and a button. It could be any game, any milestone, any character. There is no emotional payoff, no sense that what was just created mattered, and nothing that pulls them toward doing it again.</p>
+    <p class="prose">The game is asking players to be authors — but it isn't treating their work like it means anything.</p>
+    <div class="callout">
+      <p><strong>Scope note:</strong> This PRD focuses on chapter completion as Phase 1. Chapter completion is the key creative milestone for our target audience — it is the moment a player finishes telling a piece of their story. The same thinking will need to be applied to other milestones in subsequent phases, but the design and mechanics should be validated here first.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- INSIGHT -->
+  <div class="section">
+    <div class="section-label">02 · The Insight</div>
+    <div class="section-title">Three Problems, One Feature</div>
+    <p class="prose">Celebration solves three problems simultaneously:</p>
+
+    <div class="callout" style="margin-top:20px;">
+      <p><strong>No emotional payoff</strong> after completing a chapter — the current screen is generic and forgettable · <strong>Traits have no perceived value</strong> — players assign traits but never feel them expressed or reflected back · <strong>No pull to keep players writing</strong> — there is nothing at the end of a chapter that makes a player want to continue</p>
+    </div>
+
+    <p class="prose">If the celebration is rooted in the character's voice and the player's own words — and ends with a cliffhanger that teases what's next — it stops being a UI event and becomes a story moment. Players feel like authors, not users completing a checklist.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- HOW IT WORKS -->
+  <div class="section">
+    <div class="section-label">03 · How It Works</div>
+    <div class="section-title">The Sequence</div>
+    <p class="prose">The sequence replaces the current chapter completion popup entirely. One gesture — the player is the author putting the final mark on their chapter, and then the story whispers what comes next.</p>
+
+    <div class="sequence">
+      <div class="seq-item">
+        <div class="seq-num">1</div>
+        <div class="seq-content">
+          <div class="seq-title">Chapter ends</div>
+        </div>
+      </div>
+      <div class="seq-item">
+        <div class="seq-num">2</div>
+        <div class="seq-content">
+          <div class="seq-title">Character's voice appears</div>
+          <div class="seq-body">A single AI-generated line appears on screen — written in the character's voice, about what just happened in the chapter. This is the emotional beat. The story acknowledging itself.</div>
+        </div>
+      </div>
+      <div class="seq-item">
+        <div class="seq-num">3</div>
+        <div class="seq-content">
+          <div class="seq-title">The last sentence is written</div>
+          <div class="seq-body">The last sentence of the chapter is written across the screen in real time — letter by letter, fast, like a quill finishing with purpose. The player watches their own words get inscribed.</div>
+        </div>
+      </div>
+      <div class="seq-item">
+        <div class="seq-num">4</div>
+        <div class="seq-content">
+          <div class="seq-title">The period appears</div>
+          <div class="seq-body">The sentence ends. A glowing period appears, waiting.</div>
+        </div>
+      </div>
+      <div class="seq-item">
+        <div class="seq-num">5</div>
+        <div class="seq-content">
+          <div class="seq-title">Player taps — ink blooms</div>
+          <div class="seq-body">The player taps the period. It lands and settles — a small, natural ink bloom spreads outward from that dot, the way ink behaves when a quill presses firmly on paper.</div>
+        </div>
+      </div>
+      <div class="seq-item">
+        <div class="seq-num">6</div>
+        <div class="seq-content">
+          <div class="seq-title">Grab Rewards</div>
+          <div class="seq-body">Rewards appear on screen with a "Grab Rewards" button. Tapping sends them flying up into the currency counters at the top of the screen.</div>
+        </div>
+      </div>
+      <div class="seq-item">
+        <div class="seq-num">7</div>
+        <div class="seq-content">
+          <div class="seq-title">Cliffhanger appears</div>
+          <div class="seq-body">One AI-generated teaser for what's coming in the next chapter — not a summary of what just happened, but a hint of what's next. The hook that keeps players writing. Two buttons: Start Next Chapter or Close.</div>
+        </div>
+      </div>
+      <div class="seq-item">
+        <div class="seq-num">8</div>
+        <div class="seq-content">
+          <div class="seq-title">Direction picker</div>
+          <div class="seq-body">Start Next Chapter opens a direction picker — three story paths to choose from, plus a "Generate more" option if none land.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- TRAIT CONNECTION -->
+  <div class="section">
+    <div class="section-label">04 · The Trait Connection</div>
+    <div class="section-title">Traits Made Visible</div>
+    <p class="prose">The AI-generated line in step 2 is filtered through the character's traits. Same chapter event, different voice depending on who the character is. Players start noticing that how their story gets told back to them reflects the character they built — traits become visible without any additional UI or explanation.</p>
+
+    <div class="trait-examples">
+      <div class="trait-item">
+        <div class="trait-badge">Enthusiastic</div>
+        <div class="trait-quote">"I can't believe that worked — but it did, and now everything changes."</div>
+      </div>
+      <div class="trait-item">
+        <div class="trait-badge">Guarded</div>
+        <div class="trait-quote">"I said what needed to be said. Whether it was the right call — that's another question."</div>
+      </div>
+      <div class="trait-item">
+        <div class="trait-badge">Knowledgeable</div>
+        <div class="trait-quote">"The pieces were always there. I simply arranged them."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- USER STORY -->
+  <div class="section">
+    <div class="section-label">05 · User Story</div>
+    <div class="user-story">
+      <div class="user-story-label">As a player...</div>
+      <p>"As a player who just finished a chapter, I want my own words and my character's voice to be part of the completion moment — so that I feel the emotional payoff of what I just created, and I'm hooked enough to keep writing."</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SUCCESS METRICS -->
+  <div class="section">
+    <div class="section-label">06 · Success Metrics</div>
+    <div class="section-title">How We Know It's Working</div>
+
+    <table class="metrics-table">
+      <thead>
+        <tr>
+          <th style="width:120px;">Type</th>
+          <th>Metric</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="type type-primary">Primary</span></td>
+          <td>D7 retention +5% vs control group</td>
+        </tr>
+        <tr>
+          <td><span class="type type-primary">Primary</span></td>
+          <td>Chapters completed per user per week +10%</td>
+        </tr>
+        <tr>
+          <td><span class="type type-primary">Primary</span></td>
+          <td>Session length — players continuing directly into the next chapter</td>
+        </tr>
+        <tr>
+          <td><span class="type type-secondary">Secondary</span></td>
+          <td>Session frequency — how often players open the app per week</td>
+        </tr>
+        <tr>
+          <td><span class="type type-guardrail">Guardrail</span></td>
+          <td>Chapter completion rate — no decrease from baseline</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SCOPE -->
+  <div class="section">
+    <div class="section-label">07 · Scope</div>
+    <div class="section-title">What We're Building</div>
+
+    <div class="scope-cols">
+      <div class="scope-card">
+        <div class="scope-card-title"><span>Phase 1</span> Chapter Completion</div>
+        <ul class="scope-list">
+          <li>Chapter completion trigger only</li>
+          <li>AI-generated character line (one sentence, trait-informed, based on chapter content)</li>
+          <li>Ink writing animation of the last chapter sentence — fast, under 2 seconds</li>
+          <li>Glowing period interaction</li>
+          <li>Subtle ink bloom on tap</li>
+          <li>Rewards appear with "Grab Rewards" button — tapping sends rewards flying into currency counters</li>
+          <li>AI-generated cliffhanger line with Start Next Chapter or Close buttons</li>
+          <li>Start Next Chapter leads to a direction picker — three story paths plus "Generate more"</li>
+          <li>Close returns the player to their world</li>
+          <li>The player can dismiss the sequence at any point by tapping outside</li>
+        </ul>
+      </div>
+      <div class="scope-card">
+        <div class="scope-card-title"><span class="ph2">Phase 2</span> Other Milestones</div>
+        <p style="font-family:&#39;Crimson Pro&#39;,serif;font-size:15px;color:#8a7a8a;margin-bottom:16px;line-height:1.6;">Each trigger will be designed separately, sharing the same design philosophy — celebrations rooted in the creative act, not generic game UI.</p>
+        <ul class="scope-list ph2">
+          <li>Quest completion (item/building/storage placed in world)</li>
+          <li>Character creation</li>
+          <li>World creation</li>
+          <li>Level up</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- RISKS -->
+  <div class="section">
+    <div class="section-label">08 · Risks &amp; Mitigation</div>
+    <div class="section-title">What Could Go Wrong</div>
+
+    <div class="risks-grid">
+      <div class="risk-card">
+        <div class="risk-title">AI-generated lines feel generic or break character voice</div>
+        <div class="risk-body">Quality of the one-sentence line is the emotional core of the feature. QA first 500 generated lines before launch. Build a feedback mechanism. Set a kill threshold if quality drops below acceptable baseline.</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-title">The sequence feels slow</div>
+        <div class="risk-body">The ink writing animation must feel like a flourish, not a loading screen. Target under 2 seconds for the full writing sequence. Player can dismiss by tapping outside at any point.</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-title">The chapter's last sentence is too long to display well</div>
+        <div class="risk-body">The game may need to truncate or select a portion of the last sentence for display. Define a character limit and a fallback for edge cases before engineering begins.</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-title">Players dismiss every time</div>
+        <div class="risk-body">Dismissal is always available — that's intentional and correct. If the majority of players dismiss consistently, the issue is pacing or quality, not the concept. Investigate before removing the feature.</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-logo">Storycraft</div>
+  <div class="footer-meta">Celebration PRD · Helena Savenko · April 2026</div>
+</footer>
+
+
+
+</body></html>
