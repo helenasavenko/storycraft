@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)file:///Users/helenasavenko/Downloads/celebration_prototype.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Celebration — Storycraft Prototype</title>
+<link href="./Celebration — Storycraft Prototype_files/css2" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0d0618;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Cinzel', serif;
+    padding: 24px 0 40px;
+  }
+
+  .screen {
+    width: 340px; min-height: 620px;
+    background: #1a0a2e; border-radius: 32px; overflow: hidden;
+    position: relative; display: flex; flex-direction: column;
+    align-items: center; padding-bottom: 32px;
+    box-shadow: 0 0 0 8px #0d0618, 0 0 0 9px #2a1045;
+  }
+  .bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 30%, #2d1054 0%, #1a0a2e 60%, #0d0618 100%); z-index: 0; }
+  .content { position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column; align-items: center; }
+
+  .top-bar { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 20px 0; }
+  .currency { display: flex; align-items: center; gap: 6px; font-family: 'Cinzel', serif; font-size: 13px; color: #c9a96e; }
+  .coin { width: 16px; height: 16px; border-radius: 50%; display: inline-block; }
+  .coin-blue { background: radial-gradient(circle at 35% 35%, #7ac4ff, #1a6fb5); }
+  .coin-gold { background: radial-gradient(circle at 35% 35%, #ffd97a, #c8860a); }
+
+  .char-area { margin-top: 28px; width: 150px; height: 150px; position: relative; display: flex; align-items: center; justify-content: center; }
+  .char-glow { position: absolute; width: 130px; height: 130px; border-radius: 50%; background: radial-gradient(circle, rgba(180,120,255,0.2) 0%, transparent 70%); animation: pglow 2s ease-in-out infinite; }
+  @keyframes pglow { 0%,100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 1; } }
+  .char-img { width: 120px; height: 120px; border-radius: 50%; border: 2px solid rgba(180,120,255,0.35); background: linear-gradient(135deg, #3d1a6e, #1a0a2e); display: flex; align-items: center; justify-content: center; font-size: 52px; position: relative; z-index: 1; }
+
+  .btn-primary {
+    display: block; padding: 14px 40px; border-radius: 50px;
+    font-family: 'Cinzel', serif !important; font-size: 12px !important; letter-spacing: 0.08em;
+    color: #ffffff !important; cursor: pointer;
+    background-color: #6d28d9 !important; border: 2px solid #a78bfa !important;
+    transition: background-color 0.2s ease, transform 0.15s ease; text-align: center;
+  }
+  .btn-primary:hover { background-color: #7c3aed !important; }
+  .btn-primary:active { transform: scale(0.96); }
+
+  .btn-ghost {
+    display: block; padding: 14px 20px; border-radius: 50px;
+    font-family: 'Cinzel', serif !important; font-size: 11px !important; letter-spacing: 0.06em;
+    color: #d8b4fe !important; cursor: pointer;
+    background-color: transparent !important; border: 2px solid #7c3aed !important;
+    transition: border-color 0.2s ease, transform 0.15s ease; text-align: center;
+  }
+  .btn-ghost:hover { border-color: #a78bfa !important; }
+  .btn-ghost:active { transform: scale(0.96); }
+
+  .char-quote { margin: 24px 24px 0; font-family: 'Crimson Pro', serif; font-style: italic; font-size: 16px; color: #e8d5ff; text-align: center; line-height: 1.55; opacity: 0; transition: opacity 0.8s ease; min-height: 50px; }
+  .char-quote.show { opacity: 1; }
+
+  .divider { width: 60px; height: 1px; background: linear-gradient(to right, transparent, rgba(180,120,255,0.4), transparent); margin: 14px auto; opacity: 0; transition: opacity 0.5s ease; }
+  .divider.show { opacity: 1; }
+
+  .writing-wrap { margin: 0 24px; min-height: 64px; display: flex; align-items: center; justify-content: center; position: relative; }
+  .ink-text { font-family: 'Crimson Pro', serif; font-size: 15px; color: #c9a8ff; text-align: center; line-height: 1.6; }
+
+  .period-btn { width: 20px; height: 20px; border-radius: 50%; background: radial-gradient(circle at 40% 40%, #ffd97a, #c8860a); border: none; cursor: pointer; display: inline-block; vertical-align: middle; margin-left: 4px; box-shadow: 0 0 10px rgba(230,180,80,0.7); animation: ppulse 1.2s ease-in-out infinite; opacity: 0; transition: opacity 0.3s ease; position: relative; top: -1px; }
+  .period-btn.show { opacity: 1; }
+  .period-btn:active { transform: scale(0.8); }
+  @keyframes ppulse { 0%,100% { box-shadow: 0 0 8px rgba(230,180,80,0.5); } 50% { box-shadow: 0 0 22px rgba(230,180,80,1); } }
+
+  .bloom-layer { position: absolute; pointer-events: none; z-index: 10; inset: 0; }
+  .drop { position: absolute; border-radius: 50%; background: rgba(130,60,210,0.55); transform: scale(0); animation: bdrop 0.9s ease-out forwards; }
+  @keyframes bdrop { 0% { transform: scale(0); opacity: 0.9; } 60% { transform: scale(1); opacity: 0.35; } 100% { transform: scale(1.5); opacity: 0; } }
+
+  .rewards-section { margin-top: 20px; display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .rewards-section.show { opacity: 1; transform: translateY(0); }
+  .rewards-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.15em; color: rgba(200,168,255,0.45); text-transform: uppercase; }
+  .rewards-row { display: flex; gap: 20px; align-items: center; }
+  .reward-item { display: flex; align-items: center; gap: 6px; font-family: 'Cinzel', serif; font-size: 16px; color: #c9a96e; }
+  .reward-item.flying { animation: flyup 0.6s ease-in forwards; }
+  @keyframes flyup { 0% { transform: translateY(0) scale(1); opacity: 1; } 100% { transform: translateY(-200px) scale(0.3); opacity: 0; } }
+
+  .cliffhanger-section { margin: 16px 20px 0; display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0; transform: translateY(12px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .cliffhanger-section.show { opacity: 1; transform: translateY(0); }
+  .cliff-card { width: 100%; padding: 14px 16px; border: 1px solid rgba(180,120,255,0.2); border-radius: 14px; background: rgba(55,15,95,0.5); text-align: center; }
+  .cliff-label { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.2em; color: rgba(180,120,255,0.45); text-transform: uppercase; margin-bottom: 6px; }
+  .cliff-qmark { font-family: 'Cinzel', serif; font-size: 30px; color: rgba(180,120,255,0.35); margin-bottom: 4px; }
+  .cliff-text { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 14px; color: rgba(232,213,255,0.8); line-height: 1.5; }
+  .cliff-btns { display: flex; gap: 10px; width: 100%; }
+
+  .replay-lnk { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.12em; color: rgba(180,120,255,0.3); cursor: pointer; border: none; background: none; opacity: 0; transition: opacity 0.4s ease; margin-top: 4px; }
+  .replay-lnk.show { opacity: 1; }
+
+  .next-title { font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 0.08em; color: rgba(200,168,255,0.8); text-align: center; margin-bottom: 4px; }
+
+  .option-btn {
+    width: 100%; padding: 14px 16px; border-radius: 12px;
+    font-family: 'Crimson Pro', serif !important; font-style: italic; font-size: 14px !important;
+    color: #e8d5ff !important; text-align: left; cursor: pointer;
+    background-color: rgba(55,15,95,0.6) !important; border: 1px solid rgba(180,120,255,0.3) !important;
+    line-height: 1.45; transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  }
+  .option-btn:hover { background-color: rgba(80,25,130,0.7) !important; border-color: rgba(180,120,255,0.6) !important; }
+  .option-btn:active { transform: scale(0.98); }
+  .option-num { font-family: 'Cinzel', serif !important; font-style: normal !important; font-size: 10px !important; color: rgba(180,120,255,0.5) !important; display: block; margin-bottom: 4px; letter-spacing: 0.1em; }
+
+  .gameplay-msg { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 200px; opacity: 0; transition: opacity 0.6s ease; }
+  .gameplay-msg.show { opacity: 1; }
+  .gameplay-msg p { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 15px; color: rgba(200,168,255,0.6); text-align: center; padding: 0 24px; line-height: 1.6; }
+
+  .page { display: none; width: 100%; flex-direction: column; align-items: center; }
+  .page.active { display: flex; }
+</style>
+</head>
+<body>
+
+<div class="screen">
+  <div class="bg"></div>
+  <div class="content">
+
+    <div class="top-bar">
+      <div class="currency"><div class="coin coin-blue"></div><span id="blueVal">1,440</span></div>
+      <div style="font-family:&#39;Cinzel&#39;,serif;font-size:11px;color:rgba(200,168,255,0.35);letter-spacing:0.12em;" id="chapterLabel">CHAPTER 3</div>
+      <div class="currency"><div class="coin coin-gold"></div><span id="goldVal">2,102</span></div>
+    </div>
+
+    <div class="char-area">
+      <div class="char-glow"></div>
+      <div class="char-img">🧙‍♀️</div>
+    </div>
+
+    <!-- PAGE 1: start -->
+    <div class="page active" id="page1">
+      <button class="btn-primary" id="completeBtn" style="margin-top:24px;">Complete Chapter</button>
+    </div>
+
+    <!-- PAGE 2: celebration -->
+    <div class="page" id="page2">
+      <p class="char-quote" id="charQuote">"I didn't think I'd make it out of the council chamber alive — but here I am, and now everything changes."</p>
+      <div class="divider" id="divider"></div>
+      <div class="writing-wrap">
+        <span class="ink-text" id="inkText"></span>
+        <button class="period-btn" id="periodBtn"></button>
+        <div class="bloom-layer" id="bloomLayer"></div>
+      </div>
+      <div class="rewards-section" id="rewardsSection">
+        <div class="rewards-label">Rewards</div>
+        <div class="rewards-row">
+          <div class="reward-item" id="r1"><span style="font-size:22px">🟠</span><span>+50</span></div>
+          <div class="reward-item" id="r2"><span style="font-size:22px">📜</span><span>+50</span></div>
+        </div>
+        <button class="btn-primary" id="grabBtn" style="margin-top:4px;">Grab Rewards</button>
+      </div>
+      <div class="cliffhanger-section" id="cliffSection">
+        <div class="cliff-card">
+          <div class="cliff-label">Next Chapter</div>
+          <div class="cliff-qmark">?</div>
+          <div class="cliff-text">Someone in that chamber recognized her. And they're already moving.</div>
+        </div>
+        <div class="cliff-btns">
+          <button class="btn-primary" id="nextChapterBtn" style="padding:12px 10px;flex:1;font-size:11px;">Start Chapter 4</button>
+          <button class="btn-ghost" id="closeBtn" style="padding:12px 10px;flex:1;">Close</button>
+        </div>
+        <button class="replay-lnk" id="replayLnk">↺ replay</button>
+      </div>
+    </div>
+
+    <!-- PAGE 3: direction picker -->
+    <div class="page" id="page3" style="margin-top:20px;gap:12px;padding:0 20px;">
+      <div class="next-title">What happens in Chapter 4?</div>
+      <button class="option-btn" onclick="chooseDirection()">
+        <span class="option-num">CHAPTER 4 — PATH 1</span>
+        Someone from the chamber is already following Zara into the storm. She can feel it.
+      </button>
+      <button class="option-btn" onclick="chooseDirection()">
+        <span class="option-num">CHAPTER 4 — PATH 2</span>
+        Zara finds refuge in an old ally's shop — but the ally has changed sides.
+      </button>
+      <button class="option-btn" onclick="chooseDirection()">
+        <span class="option-num">CHAPTER 4 — PATH 3</span>
+        The seal she destroyed wasn't the only one. There's another, and it's already been activated.
+      </button>
+      <button class="btn-ghost" onclick="chooseDirection()" style="width:100%;margin-top:4px;">Generate more</button>
+    </div>
+
+    <!-- PAGE 4: gameplay transition -->
+    <div class="page" id="page4">
+      <div class="gameplay-msg" id="gameplayMsg">
+        <div style="font-size:40px;">✍️</div>
+        <p>Chapter 4 begins...<br>Your story continues.</p>
+        <button class="btn-primary" id="backToStartBtn" style="margin-top:8px;">↺ Back to start</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const sentence = "The council's seal shattered against the stone floor, and Zara walked out into the storm";
+let ti = null;
+const $ = id => document.getElementById(id);
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  $(id).classList.add('active');
+}
+
+async function startCelebration() {
+  showPage('page2');
+  await sleep(300);
+  $('charQuote').classList.add('show');
+  await sleep(1600);
+  $('divider').classList.add('show');
+  await sleep(400);
+  await typeText();
+  await sleep(200);
+  $('periodBtn').classList.add('show');
+}
+
+function typeText() {
+  return new Promise(resolve => {
+    $('inkText').textContent = '';
+    let typed = 0;
+    ti = setInterval(() => {
+      if (typed < sentence.length) {
+        $('inkText').textContent = sentence.slice(0, ++typed);
+      } else { clearInterval(ti); resolve(); }
+    }, 26);
+  });
+}
+
+$('completeBtn').addEventListener('click', startCelebration);
+
+$('periodBtn').addEventListener('click', function() {
+  this.style.animation = 'none';
+  this.style.opacity = '0.3';
+  this.style.pointerEvents = 'none';
+  triggerBloom(this);
+  setTimeout(() => $('rewardsSection').classList.add('show'), 500);
+});
+
+function triggerBloom(btn) {
+  const bl = $('bloomLayer');
+  const br = btn.getBoundingClientRect();
+  const lr = bl.getBoundingClientRect();
+  const cx = br.left - lr.left + 10;
+  const cy = br.top - lr.top + 10;
+  for (let i = 0; i < 7; i++) {
+    const d = document.createElement('div');
+    d.className = 'drop';
+    const sz = 18 + Math.random() * 55;
+    const ang = (Math.PI * 2 / 7) * i + Math.random() * 0.5;
+    const dist = 18 + Math.random() * 32;
+    d.style.cssText = `width:${sz}px;height:${sz}px;left:${cx-sz/2+Math.cos(ang)*dist}px;top:${cy-sz/2+Math.sin(ang)*dist}px;animation-delay:${i*0.04}s`;
+    bl.appendChild(d);
+    setTimeout(() => d.remove(), 1200);
+  }
+}
+
+$('grabBtn').addEventListener('click', function() {
+  this.style.opacity = '0'; this.style.pointerEvents = 'none';
+  setTimeout(() => $('r1').classList.add('flying'), 0);
+  setTimeout(() => $('r2').classList.add('flying'), 120);
+  setTimeout(() => { $('blueVal').textContent = '1,490'; $('goldVal').textContent = '2,152'; }, 600);
+  setTimeout(() => {
+    $('rewardsSection').style.display = 'none';
+    $('cliffSection').classList.add('show');
+    setTimeout(() => $('replayLnk').classList.add('show'), 600);
+  }, 900);
+});
+
+$('closeBtn').addEventListener('click', () => { resetCelebration(); showPage('page1'); });
+
+$('nextChapterBtn').addEventListener('click', () => {
+  $('chapterLabel').textContent = 'CHAPTER 4';
+  showPage('page3');
+});
+
+function chooseDirection() {
+  showPage('page4');
+  setTimeout(() => $('gameplayMsg').classList.add('show'), 100);
+}
+
+$('backToStartBtn').addEventListener('click', () => {
+  resetCelebration();
+  $('chapterLabel').textContent = 'CHAPTER 3';
+  showPage('page1');
+});
+
+$('replayLnk').addEventListener('click', () => { resetCelebration(); startCelebration(); });
+
+function resetCelebration() {
+  $('charQuote').classList.remove('show');
+  $('divider').classList.remove('show');
+  $('inkText').textContent = '';
+  const pb = $('periodBtn');
+  pb.classList.remove('show'); pb.style.animation = ''; pb.style.opacity = ''; pb.style.pointerEvents = '';
+  const rs = $('rewardsSection');
+  rs.classList.remove('show'); rs.style.display = '';
+  $('r1').classList.remove('flying'); $('r2').classList.remove('flying');
+  $('cliffSection').classList.remove('show');
+  $('replayLnk').classList.remove('show');
+  const gb = $('grabBtn'); gb.style.opacity = ''; gb.style.pointerEvents = '';
+  $('gameplayMsg').classList.remove('show');
+  $('blueVal').textContent = '1,440'; $('goldVal').textContent = '2,102';
+}
+</script>
+
+
+</body></html>
